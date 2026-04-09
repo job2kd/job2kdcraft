@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoricaCraft</title>
+    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-green: #39ff14;
+            --bg-black: #050505;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-black);
+            color: white;
+            /* Switched to Minecraftia font */
+            font-family: 'Minecraftia', sans-serif; 
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- PS4 WAVE BACKGROUND ANIMATION --- */
+        .wave-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #001a33 0%, #050505 100%);
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(0, 242, 255, 0.1);
+            border-radius: 40%;
+            animation: drift 15s infinite linear;
+        }
+
+        .wave.two {
+            animation: drift 22s infinite linear;
+            background: rgba(0, 242, 255, 0.05);
+            border-radius: 35%;
+        }
+
+        @keyframes drift {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- HEADER SECTION --- */
+        .header {
+            text-align: center;
+            margin-top: 50px;
+            z-index: 1;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border: 1px solid var(--neon-blue); /* Thinned line as requested */
+            background: #111;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 0 15px var(--neon-blue);
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .description {
+            max-width: 600px;
+            font-size: 0.9rem; /* Smaller for pixel font readability */
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .neon-divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+            box-shadow: 0 0 8px var(--neon-blue);
+            margin: 40px 0;
+        }
+
+        /* --- CATEGORY BOXES --- */
+        .main-box {
+            width: 90%;
+            max-width: 1200px;
+            border: 1px solid var(--neon-blue); /* Thinned neon line */
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            margin-bottom: 50px;
+            padding: 30px;
+            background: transparent;
+        }
+
+        .main-box.bedrock {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-top: 0;
+        }
+
+        .sub-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-column {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 5px;
+        }
+
+        /* --- ITEM CARDS --- */
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .item-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            transition: 0.3s;
+        }
+
+        .item-card:hover {
+            border-color: var(--neon-blue);
+            background: rgba(0, 242, 255, 0.05);
+        }
+
+        .bedrock .item-card:hover {
+            border-color: var(--neon-green);
+        }
+
+        .item-card h3 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .item-card p {
+            font-size: 0.7rem;
+            color: #ccc;
+        }
+
+        .item-img {
+            width: 150px;
+            height: 150px;
+            background: #222;
+            margin: 10px 0;
+            object-fit: cover;
+            border: 1px solid #333;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: 0.3s;
+        }
+
+        .bedrock .download-btn {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        .download-btn:hover {
+            background: var(--neon-blue);
+            color: black;
+        }
+
+        .bedrock .download-btn:hover {
+            background: var(--neon-green);
+            color: black;
+        }
+
+        .footer {
+            font-size: 0.6rem;
+            opacity: 0.6;
+            margin: 50px 0 20px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wave-container">
+        <div class="wave"></div>
+        <div class="wave two"></div>
+    </div>
+
+    <div class="header">
+        <div class="profile-photo">
+            <img src="https://cdn.discordapp.com/attachments/1482872655123054705/1491762524415328377/BM222.png?ex=69d8df9d&is=69d78e1d&hm=f9fb73f94dce8c121514119ecee622808b1a8c81b3dcbe9da135ae95f304b675&" alt="Profile">
+        </div>
+        <h1>MoricaCraft</h1>
+        <p class="description">Welcome to MoricaCraft. The website where I publish all my stuff related to Minecraft like mods or resource packs.</p>
+    </div>
+
+    <div class="neon-divider"></div>
+
+    <div class="main-box">
+        <h2 style="color: var(--neon-blue);">Java</h2>
+        <div class="sub-container">
+            <div class="category-column">
+                <div class="category-title">Mods</div>
+                <div class="item-grid" id="java-mods">
+                    <div class="item-card">
+                        <h3>Better MineCraft</h3>
+                <center>   <img src="https://cdn.discordapp.com/attachments/1482872655123054705/1491762524415328377/BM222.png?ex=69d8df9d&is=69d78e1d&hm=f9fb73f94dce8c121514119ecee622808b1a8c81b3dcbe9da135ae95f304b675&" class="item-img"> </center> 
+                        <p>I added new building blocks and new items to the game. To make the game look more realistic. For Example if you are a builder, I added for you some blocks to make your build look better. Added new food and items to enhance the game and make it realistic. Download now!</p>
+                        <a href="yourlinkhere" class="download-btn">DOWNLOAD</a>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="category-column">
+                <div class="category-title">Resource Packs</div>
+                <div class="item-grid">
+                    <div class="item-card">
+                        <h3>MoricaRP</h3>
+                     <center>   <img src="https://cdn.discordapp.com/attachments/1482872655123054705/1491768126252253294/BM333.png?ex=69d8e4d5&is=69d79355&hm=0549c724cd86dd3b6003d8d3ace1190237a5bf9a1ed3bfb58784fcf6676483c6&" class="item-img"> </center>
+                        <p>Changing the old boring textures with new nice ones.</p>
+                        <a href="yourlinkhere" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-box bedrock">
+        <h2 style="color: var(--neon-green);">Bedrock</h2>
+        <div class="sub-container">
+            <div class="category-column">
+                <div class="category-title">Texture Packs</div>
+                <div class="item-grid">
+                    <div class="item-card">
+                        <h3>Coming Soon...</h3>
+                        <img src="https://via.placeholder.com/250x120" class="item-img">
+                        <p>Coming Soon...</p>
+                        <a href="yourlinkhere" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+            <div class="category-column">
+                <div class="category-title">Behaviour Packs</div>
+                <div class="item-grid">
+                    <div class="item-card">
+                        <h3>Coming Soon</h3>
+                        <img src="https://via.placeholder.com/250x120" class="item-img">
+                        <p>Coming Soon...</p>
+                        <a href="yourlinkhere" class="download-btn">DOWNLOAD</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Copyrighted by Morica 2026.
+    </div>
+
+</body>
+</html>
